@@ -1,0 +1,6 @@
+framework module Pods_BytedanceWeatherTests {
+  umbrella header "Pods-BytedanceWeatherTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

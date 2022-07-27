@@ -1,0 +1,6 @@
+framework module Pods_BytedanceWeather {
+  umbrella header "Pods-BytedanceWeather-umbrella.h"
+
+  export *
+  module * { export * }
+}
