@@ -3,10 +3,85 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "DailyWordModel.init(json:):DailyWordModel.swift">
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in ViewController.viewDidLoad():ViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "resp.mapJSON()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in OverallViewController.temLabel.getter:OverallViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.dayWeatherModel">
+            </PersistentString>
+            <PersistentString
+               value = "label.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AppDelegate.application(_:didFinishLaunchingWithOptions:):AppDelegate.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "window?.windowScene?.statusBarManager?.statusBarFrame.size.height">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "OverallViewController.setupNav():OverallViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.navRightSelectBtn.frame">
+            </PersistentString>
+            <PersistentString
+               value = "height * 0.8">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in WeatherDetailViewController.contents.getter:WeatherDetailViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "OverallViewController.acquireDailyWord(model:):OverallViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "WeatherNavButton.imageRect(forContentRect:):WeatherNavButton.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in NetManager.dailyWordRequest(type:):NetManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "JSON(resp.data)[&quot;data&quot;]">
+            </PersistentString>
+            <PersistentString
+               value = "JSON(resp.data)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "getWeekDays(days:):Common.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Date.getWeekDay(dateString: &quot;2022-8-6&quot;) % 7">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in NetManager.weatherRequest(type:):NetManager.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.viewDidLoad():ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.navigationController">
+            </PersistentString>
+            <PersistentString
+               value = "self.navigationItem">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

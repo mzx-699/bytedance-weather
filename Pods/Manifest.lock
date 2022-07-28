@@ -1,6 +1,6 @@
 PODS:
   - Alamofire (5.6.2)
-  - HandyJSON (5.0.2)
+  - ESTabBarController-swift (2.8.0)
   - Moya (15.0.0):
     - Moya/Core (= 15.0.0)
   - Moya/Core (15.0.0):
@@ -9,7 +9,7 @@ PODS:
   - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
-  - HandyJSON
+  - ESTabBarController-swift
   - Moya (~> 15.0)
   - SnapKit
   - SwiftyJSON (~> 4.0)
@@ -17,18 +17,18 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
-    - HandyJSON
+    - ESTabBarController-swift
     - Moya
     - SnapKit
     - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
-  HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
+  ESTabBarController-swift: 05593a6ad64700b03c0eb60ff625916370aa4136
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: e9c5212b0a3a11ef9968961bc397f1a31e430649
+PODFILE CHECKSUM: 435c230166fa5d44db823ad85447ae2acf68ddc2
 
 COCOAPODS: 1.11.2

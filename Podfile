@@ -7,6 +7,7 @@ target 'BytedanceWeather' do
   pod 'SnapKit'
   pod 'Moya', '~> 15.0'
   pod 'SwiftyJSON', '~> 4.0'
+  pod "ESTabBarController-swift"
   # Pods for BytedanceWeather
 
   target 'BytedanceWeatherTests' do
