@@ -17,17 +17,26 @@ class NetManager: NSObject {
     let dailyWordProvider = MoyaProvider<DailyWordAPI>()
     
     func weatherRequest(type: WeatherAPI) {
-        weatherProvider.request(type) { result in
+        let _ = weatherProvider.cacheRequest(type, cacheType: .default, callbackQueue: DispatchQueue.main, progress: nil) { result in
             switch result {
             case let .success(resp):
                 if resp.statusCode == 200 {
                     switch(type) {
                     case .weekWeather, .weekWeatherCity(_):
-                        let ww = WeekWeather(json: JSON(resp.data))
+                        let ww = resp.mapObject(WeekWeather.self, modelKey: nil)
                         self.weatherDelegate?.acquireWeekWeather(model: ww)
                     case .dayWeather, .dayWeatherCity(_):
-                        let dw = DayWeather(json: JSON(resp.data))
+                        let dw = resp.mapObject(DayWeather.self, modelKey: nil)
                         self.weatherDelegate?.acquireDayWeather(model: dw)
+                    }
+                } else if resp.statusCode == 230 {
+                    switch(type) {
+                    case .weekWeather, .weekWeatherCity(_):
+                        let ww = resp.mapObject(WeekWeather.self, modelKey: nil)
+                        self.weatherDelegate?.acquireWeekWeatherCache(model: ww)
+                    case .dayWeather, .dayWeatherCity(_):
+                        let dw = resp.mapObject(DayWeather.self, modelKey: nil)
+                        self.weatherDelegate?.acquireDayWeatherCache(model: dw)
                     }
                 }
                 break
@@ -39,16 +48,22 @@ class NetManager: NSObject {
     }
     
     func dailyWordRequest(type: DailyWordAPI) {
-        dailyWordProvider.request(type) { result in
+        let _ = dailyWordProvider.cacheRequest(type, cacheType: .default, callbackQueue: DispatchQueue.main, progress: nil) { result in
             switch result {
             case let .success(resp):
-                //TODO: - 代理方法展示
-                let dw = DailyWordModel(json: JSON(resp.data)["data"])
-                self.dailyWordDelegate?.acquireDailyWord(model: dw)
+                if resp.statusCode == 200 {
+                    let json = try! JSON(data: resp.data)
+                    let dw = DailyWord.mapModel(from: json["data"][0])
+                    self.dailyWordDelegate?.acquireDailyWord(model: dw)
+                } else if resp.statusCode == 230 {
+                    let json = try! JSON(data: resp.data)
+                    let dw = DailyWord.mapModel(from: json["data"][0])
+                    self.dailyWordDelegate?.acquireDailyWordCache(model: dw)
+                }
+            
                 break
             case let .failure(moyaError):
                 print(moyaError)
-            
             }
         }
     }

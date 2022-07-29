@@ -18,7 +18,7 @@ enum DailyWordAPI {
 extension DailyWordAPI: TargetType {
 
     var baseURL: URL {
-        return URL(string: "https://www.mxnzp.com/api/")!
+        return URL(string: DAILYWORD_URL)!
     }
     
     var method: Moya.Method {

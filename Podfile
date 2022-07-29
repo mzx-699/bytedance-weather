@@ -8,6 +8,8 @@ target 'BytedanceWeather' do
   pod 'Moya', '~> 15.0'
   pod 'SwiftyJSON', '~> 4.0'
   pod "ESTabBarController-swift"
+  pod 'MoyaMapper'
+  pod 'MoyaMapper/MMCache'
   # Pods for BytedanceWeather
 
   target 'BytedanceWeatherTests' do

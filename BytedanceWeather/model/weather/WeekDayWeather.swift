@@ -7,27 +7,26 @@
 
 import Foundation
 import SwiftyJSON
-class WeekDayWeather: NSObject {
-    init(json: JSON) {
-        date = json["date"].stringValue
-        wea = json["wea"].stringValue
-        weaImg = json["wea_img"].stringValue
-        temDay = json["tem_day"].stringValue
-        temNight = json["tem_night"].stringValue
-        win = json["win"].stringValue
-        winSpeed = json["win_speed"].stringValue
+import MoyaMapper
+struct WeekDayWeather: Modelable {
+    init() {
+        
     }
     
-    @objc var date: String?
-    @objc var wea: String?
-    @objc var weaImg: String?
-    @objc var temDay: String?
-    @objc var temNight: String?
-    @objc var win: String?
-    @objc var winSpeed: String?
+    mutating func mapping(_ json: JSON) {
+        self.weaImg = json["wea_img"].stringValue
+        self.temDay = json["tem_day"].stringValue
+        self.temNight = json["tem_night"].stringValue
+        self.winSpeed = json["win_speed"].stringValue
+    }
     
-    override var description: String {
-        let properties = ["date", "wea", "weaImg", "temDay", "temNight", "win", "winSpeed"]
-        return dictionaryWithValues(forKeys: properties).description
-     }
+    
+    var date: String?
+    var wea: String?
+    var weaImg: String?
+    var temDay: String?
+    var temNight: String?
+    var win: String?
+    var winSpeed: String?
+    
 }

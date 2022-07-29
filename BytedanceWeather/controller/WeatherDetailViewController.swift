@@ -12,15 +12,16 @@ class WeatherDetailViewController: UIViewController {
     // 网络
     let netManager = NetManager()
     //MARK: - model
-    var dayWeatherModel: DayWeather?
-    var dailyWordModel: DailyWordModel?
+    var dayWeatherModel: DayWeather? = DayWeather.fromCache(key: DAYWEATHER_CACHE_KEY, cacheContainer: .hybrid)
+    var dailyWordModel: DailyWord? = DailyWord.fromCache(key: DAILYWORD_CACHE_KEY, cacheContainer: .hybrid)
     var dayWeatherMap: Dictionary<String, String>?
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         initNetDelegate()
-        self.netManager.weekWeatherRequest(city: Weather.city)
+        self.netManager.dayWeatherRequest(city: Weather.city)
         self.netManager.dailyWordRequest(type: .recommend)
+        
     }
     //MARK: - 加载plist文件
     private lazy var contents: [Array<Dictionary<String, String>>] = {
@@ -43,7 +44,7 @@ class WeatherDetailViewController: UIViewController {
     // 中间最高温度，最低温度 label
     private lazy var centerDailyWordLabel: UILabel = {
         let label = UILabel()
-        label.text = "秋招好难啊～秋招好难啊～秋招好难啊～秋招好难啊～秋招好难啊～秋招好难啊～秋招好难啊～秋招好难啊～秋招好难啊～秋招好难啊～"
+        label.text = self.dailyWordModel?.content ?? "秋招好难啊～秋招好难啊～秋招好难啊～秋招好难啊～"
         label.textColor = .gray
         label.alpha = 0.6
         label.textAlignment = .center
@@ -112,6 +113,18 @@ extension WeatherDetailViewController: UITableViewDelegate, UITableViewDataSourc
 }
 //MARK: - net delegate
 extension WeatherDetailViewController: DailyWordDelegate, WeaetherDelegate {
+    func acquireDailyWordCache(model: DailyWord) {
+        self.dailyWordModel = model
+        updateDailyWordData()
+    }
+    
+    func acquireWeekWeatherCache(model: WeekWeather) {}
+    
+    func acquireDayWeatherCache(model: DayWeather) {
+        self.dayWeatherModel = model
+        updateDayWeatherData()
+    }
+    
     func initNetDelegate() {
         self.netManager.weatherDelegate = self
         self.netManager.dailyWordDelegate = self
@@ -119,26 +132,28 @@ extension WeatherDetailViewController: DailyWordDelegate, WeaetherDelegate {
     func acquireDayWeather(model: DayWeather) {
         self.dayWeatherModel = model
         updateDayWeatherData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
+            self.netManager.weatherRequest(type: .dayWeatherCity(Weather.city))
+        }
     }
     func acquireWeekWeather(model: WeekWeather) {
-        
     }
-    func acquireDailyWord(model: DailyWordModel) {
+    func acquireDailyWord(model: DailyWord) {
         self.dailyWordModel = model
         updateDailyWordData()
     }
     // 获得请求数据后，需要更新
     func updateDayWeatherData() {
+        self.dayWeatherModel?.cache(key: DAYWEATHER_CACHE_KEY, cacheContainer: .hybrid)
         self.navigationItem.title = self.dayWeatherModel!.city!
         self.temLabel.text = self.dayWeatherModel!.tem! + "℃"
         self.weaLabel.text = self.dayWeatherModel!.wea!
         self.dayWeatherMap = getDayWeatherMap(day: self.dayWeatherModel!)
         detailTableView.reloadData()
-//        DispatchQueue.global().asyncAfter(deadline: .now() + 60) {
-//            self.netManager.weatherRequest(type: .dayWeather)
-//        }
+        
     }
     func updateDailyWordData() {
+        self.dailyWordModel?.cache(key: DAILYWORD_CACHE_KEY, cacheContainer: .hybrid)
         self.centerDailyWordLabel.text = self.dailyWordModel!.content
         self.detailTableView.snp.updateConstraints { make in
             make.top.equalTo(self.centerDailyWordLabel.snp.bottom).offset(TOP_SPACE * 2)

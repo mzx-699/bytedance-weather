@@ -12,4 +12,6 @@ protocol WeaetherDelegate: NSObjectProtocol {
     
     func acquireWeekWeather(model: WeekWeather)
     func acquireDayWeather(model: DayWeather)
+    func acquireWeekWeatherCache(model: WeekWeather)
+    func acquireDayWeatherCache(model: DayWeather)
 }

@@ -14,12 +14,12 @@ class OverallViewController: UIViewController {
     // 网络
     let netManager = NetManager()
     //MARK: - model
-    var dayWeatherModel: DayWeather?
-    var weekWeatherModel: WeekWeather?
-    var dailyWordModel: DailyWordModel?
+    var dayWeatherModel: DayWeather? = DayWeather.fromCache(key: DAYWEATHER_CACHE_KEY, cacheContainer: .hybrid)
+    var weekWeatherModel: WeekWeather? = WeekWeather.fromCache(key: WEEKWEATHER_CACHE_KEY, cacheContainer: .hybrid)
     var weekdays: [String] = ["01号(今天)", "02号(明天)", "03号(后天)", "04号(周一)", "05号(周三)", "06号(周四)", "07号(周五)"]
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.weekdays = getWeekDays(days: self.weekWeatherModel?.data ?? nil)
         setupUI()
         initNetDelegate()
         self.netManager.weekWeatherRequest(city: Weather.city)
@@ -90,13 +90,13 @@ extension OverallViewController: UITableViewDelegate, UITableViewDataSource {
         return 1
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        return (self.weekWeatherModel?.data.count ?? 7) + 1
+        return (self.weekWeatherModel?.data?.count ?? 7) + 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             return UITableViewCell()
         }
-        let day = self.weekWeatherModel?.data[indexPath.section - 1]
+        let day = self.weekWeatherModel?.data?[indexPath.section - 1]
         let cell = tableView.dequeueReusableCell(withIdentifier: WEATHER_TABLEVIEWCELL_IDENTIFIER, for: indexPath) as! WeatherTableViewCell
         cell.selectionStyle = .none
         cell.dateLabel.text = self.weekdays[indexPath.section - 1]
@@ -117,43 +117,50 @@ extension OverallViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 //MARK: - net delegate
-extension OverallViewController: DailyWordDelegate, WeaetherDelegate {
+extension OverallViewController: WeaetherDelegate {
     
     func initNetDelegate() {
         self.netManager.weatherDelegate = self
-        self.netManager.dailyWordDelegate = self
     }
     func acquireDayWeather(model: DayWeather) {
         self.dayWeatherModel = model
         updateDayWeatherData()
+        // 开启延时任务
+        DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
+            self.netManager.dayWeatherRequest(city: Weather.city)
+        }
     }
     func acquireWeekWeather(model: WeekWeather) {
         self.weekWeatherModel = model
         updateWeekWeatherData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
+            self.netManager.weekWeatherRequest(city: Weather.city)
+        }
     }
-    func acquireDailyWord(model: DailyWordModel) {
-        self.dailyWordModel = model
+    func acquireDayWeatherCache(model: DayWeather) {
+        self.dayWeatherModel = model
+        updateDayWeatherData()
+    }
+    func acquireWeekWeatherCache(model: WeekWeather) {
+        self.weekWeatherModel = model
+        updateWeekWeatherData()
     }
     // 获得请求数据后，需要更新
     func updateDayWeatherData() {
+        self.weekWeatherModel?.cache(key: WEEKWEATHER_CACHE_KEY, cacheContainer: .hybrid)
+        self.dayWeatherModel?.cache(key: DAYWEATHER_CACHE_KEY, cacheContainer: .hybrid)
         self.navigationItem.title = self.dayWeatherModel!.city!
         self.temLabel.text = self.dayWeatherModel!.tem! + "℃"
         let temDay = self.dayWeatherModel!.temDay!
         let temNight = self.dayWeatherModel!.temNight!
         self.centerTemLabel.text = "最高温度: " + temDay + "℃ 最低温度: " + temNight + "℃"
         self.weaLabel.text = self.dayWeatherModel!.wea!
-        // 开启延时任务
-        DispatchQueue.global().asyncAfter(deadline: .now() + 60) {
-            self.netManager.dayWeatherRequest(city: Weather.city)
-        }
         
     }
     func updateWeekWeatherData() {
         self.weekdays = getWeekDays(days: (self.weekWeatherModel?.data)!)
         forecastTableView.reloadData()
-        DispatchQueue.global().asyncAfter(deadline: .now() + 60) {
-            self.netManager.weekWeatherRequest(city: Weather.city)
-        }
+        
     }
     
 }
@@ -217,7 +224,6 @@ extension OverallViewController {
         let v = UIView(frame: self.navRightSelectBtn.frame)
         v.addSubview(self.navRightSelectBtn)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: v)
-        
     }
 }
 

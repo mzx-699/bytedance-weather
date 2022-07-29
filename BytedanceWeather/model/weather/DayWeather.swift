@@ -7,49 +7,39 @@
 
 import Foundation
 import SwiftyJSON
+import MoyaMapper
 
-class DayWeather: NSObject {
-
-    init(json: JSON) {
-        nums = json["nums"].intValue
-        cityid = json["cityid"].stringValue
-        city = json["city"].stringValue
-        date = json["date"].stringValue
-        week = json["week"].stringValue
-        updateTime = json["update_time"].stringValue
-        wea = json["wea"].stringValue
-        weaImg = json["wea_img"].stringValue
-        tem = json["tem"].stringValue
-        temDay = json["tem_day"].stringValue
-        temNight = json["tem_night"].stringValue
-        win = json["win"].stringValue
-        winSpeed = json["win_speed"].stringValue
-        winMeter = json["win_meter"].stringValue
-        air = json["air"].stringValue
-        pressure = json["pressure"].stringValue
-        humidity = json["humidity"].stringValue
+struct DayWeather: Modelable {
+    init() {
+        
     }
     
-    @objc var nums: Int
-    @objc var cityid: String?
-    @objc var city: String?
-    @objc var date: String?
-    @objc var week: String?
-    @objc var updateTime: String?
-    @objc var wea: String?
-    @objc var weaImg: String?
-    @objc var tem: String?
-    @objc var temDay: String?
-    @objc var temNight: String?
-    @objc var win: String?
-    @objc var winSpeed: String?
-    @objc var winMeter: String?
-    @objc var air: String?
-    @objc var pressure: String?
-    @objc var humidity: String?
+    mutating func mapping(_ json: JSON) {
+        self.weaImg = json["wea_img"].stringValue
+        self.updateTime = json["update_time"].stringValue
+        self.temDay = json["tem_day"].stringValue
+        self.temNight = json["tem_night"].stringValue
+        self.winSpeed = json["win_speed"].stringValue
+        self.winMeter = json["win_meter"].stringValue
+    }
+
     
-    override var description: String {
-        let properties = ["nums", "cityid", "city", "date", "week", "updateTime", "wea", "weaImg", "tem", "temDay", "temNight", "win", "winSpeed", "winMeter", "air", "pressure", "humidity"]
-        return dictionaryWithValues(forKeys: properties).description
-     }
+    var nums: Int?
+    var cityid: String?
+    var city: String?
+    var date: String?
+    var week: String?
+    var updateTime: String?
+    var wea: String?
+    var weaImg: String?
+    var tem: String?
+    var temDay: String?
+    var temNight: String?
+    var win: String?
+    var winSpeed: String?
+    var winMeter: String?
+    var air: String?
+    var pressure: String?
+    var humidity: String?
+    
 }

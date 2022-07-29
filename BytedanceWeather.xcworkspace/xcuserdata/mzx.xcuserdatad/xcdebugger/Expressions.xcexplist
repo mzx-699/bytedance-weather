@@ -53,6 +53,14 @@
          contextName = "WeatherNavButton.imageRect(forContentRect:):WeatherNavButton.swift">
       </ContextState>
       <ContextState
+         contextName = "WeatherDetailViewController.updateDayWeatherData():WeatherDetailViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.dayWeatherModel">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in NetManager.dailyWordRequest(type:):NetManager.swift">
          <PersistentStrings>
             <PersistentString

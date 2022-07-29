@@ -23,7 +23,7 @@ enum WeatherAPI: Equatable {
 extension WeatherAPI: TargetType {
     
     var baseURL: URL {
-        return URL(string: "https://v0.yiketianqi.com/")!
+        return URL(string: WEATHER_URL)!
     }
     
     var method: Moya.Method {

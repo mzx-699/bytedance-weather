@@ -24,7 +24,7 @@
 		73DBE6B4289136300049CD54 /* NetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DBE6B3289136300049CD54 /* NetManager.swift */; };
 		73DBE6B628913B2F0049CD54 /* WeatherDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DBE6B528913B2F0049CD54 /* WeatherDelegate.swift */; };
 		73DBE6B828913D800049CD54 /* DailyWordDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DBE6B728913D800049CD54 /* DailyWordDelegate.swift */; };
-		73DBE6BA28913E010049CD54 /* DailyWordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DBE6B928913E010049CD54 /* DailyWordModel.swift */; };
+		73DBE6BA28913E010049CD54 /* DailyWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DBE6B928913E010049CD54 /* DailyWord.swift */; };
 		73DBE6C028917B210049CD54 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DBE6BF28917B200049CD54 /* Common.swift */; };
 		73DBE6C228917F350049CD54 /* WeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DBE6C128917F350049CD54 /* WeatherTableViewCell.swift */; };
 		73DBE6C528922C8E0049CD54 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DBE6C428922C8E0049CD54 /* Date+Extension.swift */; };
@@ -82,7 +82,7 @@
 		73DBE6B3289136300049CD54 /* NetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetManager.swift; sourceTree = "<group>"; };
 		73DBE6B528913B2F0049CD54 /* WeatherDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDelegate.swift; sourceTree = "<group>"; };
 		73DBE6B728913D800049CD54 /* DailyWordDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWordDelegate.swift; sourceTree = "<group>"; };
-		73DBE6B928913E010049CD54 /* DailyWordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWordModel.swift; sourceTree = "<group>"; };
+		73DBE6B928913E010049CD54 /* DailyWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWord.swift; sourceTree = "<group>"; };
 		73DBE6BF28917B200049CD54 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		73DBE6C128917F350049CD54 /* WeatherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableViewCell.swift; sourceTree = "<group>"; };
 		73DBE6C428922C8E0049CD54 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
@@ -91,6 +91,7 @@
 		73DBE6CC2892710E0049CD54 /* SelectCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCityViewController.swift; sourceTree = "<group>"; };
 		73DBE6D02892722E0049CD54 /* WeatherNavButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherNavButton.swift; sourceTree = "<group>"; };
 		73DBE6D3289292AC0049CD54 /* SelectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTableViewCell.swift; sourceTree = "<group>"; };
+		73DBE6D8289386E50049CD54 /* BytedanceWeather-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BytedanceWeather-Bridging-Header.h"; sourceTree = "<group>"; };
 		826652C3DBF61FD59B68F3C0 /* Pods-BytedanceWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BytedanceWeather.debug.xcconfig"; path = "Target Support Files/Pods-BytedanceWeather/Pods-BytedanceWeather.debug.xcconfig"; sourceTree = "<group>"; };
 		8F48278C59CF63EF1191EC79 /* Pods_BytedanceWeatherTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BytedanceWeatherTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF2A92CF060E40C949E29E90 /* Pods-BytedanceWeather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BytedanceWeather.release.xcconfig"; path = "Target Support Files/Pods-BytedanceWeather/Pods-BytedanceWeather.release.xcconfig"; sourceTree = "<group>"; };
@@ -150,6 +151,7 @@
 		7343CD3B288E985D00A0D043 /* BytedanceWeather */ = {
 			isa = PBXGroup;
 			children = (
+				73DBE6D5289385260049CD54 /* cache */,
 				73DBE6C828925A020049CD54 /* sources */,
 				73DBE6BE28917B100049CD54 /* common */,
 				73DBE6AF2891271F0049CD54 /* view */,
@@ -160,6 +162,7 @@
 				7343CD45288E986100A0D043 /* Assets.xcassets */,
 				7343CD47288E986100A0D043 /* LaunchScreen.storyboard */,
 				7343CD4A288E986100A0D043 /* Info.plist */,
+				73DBE6D8289386E50049CD54 /* BytedanceWeather-Bridging-Header.h */,
 			);
 			path = BytedanceWeather;
 			sourceTree = "<group>";
@@ -251,7 +254,7 @@
 		73DBE6BD28913EA90049CD54 /* dailyWord */ = {
 			isa = PBXGroup;
 			children = (
-				73DBE6B928913E010049CD54 /* DailyWordModel.swift */,
+				73DBE6B928913E010049CD54 /* DailyWord.swift */,
 			);
 			path = dailyWord;
 			sourceTree = "<group>";
@@ -297,6 +300,13 @@
 				73DBE6D02892722E0049CD54 /* WeatherNavButton.swift */,
 			);
 			path = button;
+			sourceTree = "<group>";
+		};
+		73DBE6D5289385260049CD54 /* cache */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = cache;
 			sourceTree = "<group>";
 		};
 		8891F2CB9BB982F96E5DB836 /* Pods */ = {
@@ -574,7 +584,7 @@
 				73DBE6C028917B210049CD54 /* Common.swift in Sources */,
 				73DBE6AE28911DBD0049CD54 /* WeatherDetailViewController.swift in Sources */,
 				73DBE6CD289271100049CD54 /* SelectCityViewController.swift in Sources */,
-				73DBE6BA28913E010049CD54 /* DailyWordModel.swift in Sources */,
+				73DBE6BA28913E010049CD54 /* DailyWord.swift in Sources */,
 				73DBE6A5288FD6970049CD54 /* WeekDayWeather.swift in Sources */,
 				73DBE6D4289292AE0049CD54 /* SelectTableViewCell.swift in Sources */,
 				73DBE6B828913D800049CD54 /* DailyWordDelegate.swift in Sources */,
@@ -758,6 +768,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -766,8 +777,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytedance.BytedanceWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "BytedanceWeather/BytedanceWeather-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -785,6 +797,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -793,8 +806,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bytedance.BytedanceWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "BytedanceWeather/BytedanceWeather-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -73,14 +73,14 @@ extension WeatherTableViewCell {
         self.winSpeedLabel.snp.makeConstraints { make in
             make.centerY.equalTo(self.dateLabel.snp.centerY)
             make.height.equalTo(self.dateLabel.snp.height)
-            make.left.equalTo(self.snp.centerX).offset(self.bounds.width * 0.2)
+            make.left.equalTo(self.snp.centerX).offset(self.bounds.width * 0.12)
         }
     }
     func prepareWeaImageView() {
         self.weaImageView.snp.makeConstraints { make in
             make.centerY.equalTo(self.dateLabel.snp.centerY)
             make.height.equalTo(self.dateLabel.snp.height).multipliedBy(0.8)
-            make.right.equalTo(self.snp.centerX).offset(-self.bounds.width * 0.16)
+            make.right.equalTo(self.snp.centerX).offset(-self.bounds.width * 0.12)
             make.width.equalTo(self.dateLabel.snp.height).multipliedBy(0.8)
         }
     }

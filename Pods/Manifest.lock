@@ -1,34 +1,49 @@
 PODS:
   - Alamofire (5.6.2)
+  - Cache (6.0.0)
   - ESTabBarController-swift (2.8.0)
   - Moya (15.0.0):
     - Moya/Core (= 15.0.0)
   - Moya/Core (15.0.0):
     - Alamofire (~> 5.0)
+  - MoyaMapper (3.0.1):
+    - MoyaMapper/Core (= 3.0.1)
+  - MoyaMapper/Core (3.0.1):
+    - Moya (>= 14.0.0)
+    - SwiftyJSON
+  - MoyaMapper/MMCache (3.0.1):
+    - Cache
+    - MoyaMapper/Core
   - SnapKit (5.0.1)
   - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
   - ESTabBarController-swift
   - Moya (~> 15.0)
+  - MoyaMapper
+  - MoyaMapper/MMCache
   - SnapKit
   - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Cache
     - ESTabBarController-swift
     - Moya
+    - MoyaMapper
     - SnapKit
     - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
+  Cache: 4ca7e00363fca5455f26534e5607634c820ffc2d
   ESTabBarController-swift: 05593a6ad64700b03c0eb60ff625916370aa4136
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
+  MoyaMapper: 0d4f6046601f7f4f5cc99828064057142ce8bca8
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 435c230166fa5d44db823ad85447ae2acf68ddc2
+PODFILE CHECKSUM: 79cdb2ba94032a2dbc1cb539919ac578584c5d20
 
 COCOAPODS: 1.11.2

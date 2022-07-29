@@ -8,6 +8,7 @@
 import Foundation
 protocol DailyWordDelegate: NSObjectProtocol {
     
-    func acquireDailyWord(model: DailyWordModel)
+    func acquireDailyWord(model: DailyWord)
+    func acquireDailyWordCache(model: DailyWord)
     
 }

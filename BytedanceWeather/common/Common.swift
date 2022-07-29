@@ -6,7 +6,13 @@
 //
 
 import UIKit
-
+//MARK: - cache
+let WEEKWEATHER_CACHE_KEY = "weekWeatherCacheKey"
+let DAYWEATHER_CACHE_KEY = "dayWeatherCacheKey"
+let DAILYWORD_CACHE_KEY = "dailyWordCacheKey"
+//MARK: - net
+let WEATHER_URL = "https://v0.yiketianqi.com/"
+let DAILYWORD_URL = "https://www.mxnzp.com/api/"
 //MARK: - 屏幕宽高
 let SCREEN_HEIGHT = UIScreen.main.bounds.height
 let SCREEN_WIDTH = UIScreen.main.bounds.width
@@ -24,10 +30,13 @@ let SELECT_TABLEVIEWCELL_IDENTIFIER = "selectCell"
 
 //MARK: - overall 内容处理
 let weekDays = ["周六", "周日", "周一", "周二", "周三", "周四", "周五"]
-func getWeekDays(days: [WeekDayWeather]) -> [String] {
+func getWeekDays(days: [WeekDayWeather]?) -> [String] {
+    guard days != nil else {
+        return ["01号(今天)", "02号(明天)", "03号(后天)", "04号(周一)", "05号(周三)", "06号(周四)", "07号(周五)"]
+    }
     var ret = [String]()
-    for idx in 0...(days.count - 1) {
-        let date = days[idx].date!
+    for idx in 0...(days!.count - 1) {
+        let date = days![idx].date!
         let d = date.split(separator: "-")[2]
         var nd: String = d + "号("
         if (idx == 0) {
