@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7335A0932896B60300F704A5 /* ESBasicContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7335A0922896B60300F704A5 /* ESBasicContentView.swift */; };
+		7335A0952896B63000F704A5 /* ESBouncesContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7335A0942896B63000F704A5 /* ESBouncesContentView.swift */; };
+		7335A0972896C36800F704A5 /* ESNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7335A0962896C36800F704A5 /* ESNavigationController.swift */; };
 		7343CD3D288E985D00A0D043 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7343CD3C288E985D00A0D043 /* AppDelegate.swift */; };
 		7343CD41288E985D00A0D043 /* OverallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7343CD40288E985D00A0D043 /* OverallViewController.swift */; };
 		7343CD46288E986100A0D043 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7343CD45288E986100A0D043 /* Assets.xcassets */; };
@@ -65,6 +68,9 @@
 		4725C56F9860131BAC64BF3E /* Pods_BytedanceWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BytedanceWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E15FEBB3EF297D5E606B0CC /* Pods-BytedanceWeather-BytedanceWeatherUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BytedanceWeather-BytedanceWeatherUITests.release.xcconfig"; path = "Target Support Files/Pods-BytedanceWeather-BytedanceWeatherUITests/Pods-BytedanceWeather-BytedanceWeatherUITests.release.xcconfig"; sourceTree = "<group>"; };
 		5761BB7099977FA2D9D27AFC /* Pods_BytedanceWeather_BytedanceWeatherUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BytedanceWeather_BytedanceWeatherUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7335A0922896B60300F704A5 /* ESBasicContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBasicContentView.swift; sourceTree = "<group>"; };
+		7335A0942896B63000F704A5 /* ESBouncesContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESBouncesContentView.swift; sourceTree = "<group>"; };
+		7335A0962896C36800F704A5 /* ESNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESNavigationController.swift; sourceTree = "<group>"; };
 		7343CD39288E985D00A0D043 /* BytedanceWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BytedanceWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7343CD3C288E985D00A0D043 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7343CD40288E985D00A0D043 /* OverallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverallViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +141,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7335A0912896B5EB00F704A5 /* es */ = {
+			isa = PBXGroup;
+			children = (
+				7335A0922896B60300F704A5 /* ESBasicContentView.swift */,
+				7335A0942896B63000F704A5 /* ESBouncesContentView.swift */,
+				7335A0962896C36800F704A5 /* ESNavigationController.swift */,
+			);
+			path = es;
+			sourceTree = "<group>";
+		};
 		7343CD30288E985D00A0D043 = {
 			isa = PBXGroup;
 			children = (
@@ -226,6 +242,7 @@
 		73DBE6AF2891271F0049CD54 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				7335A0912896B5EB00F704A5 /* es */,
 				73DBE6CF2892721D0049CD54 /* button */,
 				73DBE6CE289272150049CD54 /* tableviewcell */,
 			);
@@ -576,6 +593,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7335A0952896B63000F704A5 /* ESBouncesContentView.swift in Sources */,
 				73DBE6C228917F350049CD54 /* WeatherTableViewCell.swift in Sources */,
 				73DBE6C7289256280049CD54 /* DetailTableViewCell.swift in Sources */,
 				738A9C6D289502AC00D11994 /* DebugLog.swift in Sources */,
@@ -589,6 +607,7 @@
 				73DBE6B4289136300049CD54 /* NetManager.swift in Sources */,
 				7343CD6E288FB8D200A0D043 /* WeatherAPI.swift in Sources */,
 				73DBE6C028917B210049CD54 /* Common.swift in Sources */,
+				7335A0932896B60300F704A5 /* ESBasicContentView.swift in Sources */,
 				73DBE6AE28911DBD0049CD54 /* WeatherDetailViewController.swift in Sources */,
 				738A9C6F2895762900D11994 /* BaseViewController.swift in Sources */,
 				73DBE6CD289271100049CD54 /* SelectCityViewController.swift in Sources */,
@@ -597,6 +616,7 @@
 				73DBE6D4289292AE0049CD54 /* SelectTableViewCell.swift in Sources */,
 				73DBE6B828913D800049CD54 /* DailyWordDelegate.swift in Sources */,
 				7343CD41288E985D00A0D043 /* OverallViewController.swift in Sources */,
+				7335A0972896C36800F704A5 /* ESNavigationController.swift in Sources */,
 				73DBE6B2289131B20049CD54 /* DailyWordAPI.swift in Sources */,
 				7343CD3D288E985D00A0D043 /* AppDelegate.swift in Sources */,
 			);

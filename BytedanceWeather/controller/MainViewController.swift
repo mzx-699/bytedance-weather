@@ -7,30 +7,30 @@
 
 import UIKit
 import ESTabBarController_swift
-
-class MainViewController: ESTabBarController {
+// ESTabBarController_swift 有高亮bug
+class MainViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         addChildViewController()
     }
 
+
 }
 
 
 private extension MainViewController {
     func addChildViewController() {
-        addChildViewController(vc: OverallViewController(), title: "天气预报", imageName: "")
-        addChildViewController(vc: WeatherDetailViewController(), title: "当日情况", imageName: "")
+        addChildViewController(vc: OverallViewController(), title: "天气预报", imageName: "weather")
+        addChildViewController(vc: WeatherDetailViewController(), title: "当日情况", imageName: "detail")
+        
+        
     }
     
     func addChildViewController(vc: UIViewController, title: String, imageName: String) {
-        //设置标题---由内至外设置的
-        //设置图像
-//        vc.tabBarItem.image = UIImage(named: imageName)
-        //导航控制器
+//        vc.tabBarItem = ESTabBarItem(ESBouncesContentView(), title: title, image: UIImage(named: imageName), selectedImage: UIImage(named: imageName + "_sel"))
+        vc.tabBarItem = UITabBarItem(title: title, image: UIImage(named: imageName), selectedImage: UIImage(named: imageName + "_sel"))
         let nav = UINavigationController(rootViewController: vc)
-        nav.tabBarItem.title = title
-        addChild(nav)
+        self.addChild(nav)
     }
 }

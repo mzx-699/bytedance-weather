@@ -20,6 +20,7 @@ class OverallViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupUI()
         initNetDelegate()
         request()
