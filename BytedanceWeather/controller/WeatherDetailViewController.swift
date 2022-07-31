@@ -7,21 +7,25 @@
 
 import UIKit
 
-class WeatherDetailViewController: UIViewController {
+class WeatherDetailViewController: BaseViewController {
 
     // 网络
     let netManager = NetManager()
     //MARK: - model
-    var dayWeatherModel: DayWeather? = DayWeather.fromCache(key: DAYWEATHER_CACHE_KEY, cacheContainer: .hybrid)
+    var dayWeatherModel: DayWeather? = DayWeather.fromCache(key: Weather.city + "-" + DAYWEATHER_CACHE_KEY, cacheContainer: .hybrid)
     var dailyWordModel: DailyWord? = DailyWord.fromCache(key: DAILYWORD_CACHE_KEY, cacheContainer: .hybrid)
     var dayWeatherMap: Dictionary<String, String>?
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         initNetDelegate()
-        self.netManager.dayWeatherRequest(city: Weather.city)
+        request()
         self.netManager.dailyWordRequest(type: .recommend)
-        
+        NotificationCenter.default.addObserver(forName: .init(rawValue: NOTIFICATION_CENTER_UPDATE_CITY), object: nil, queue: nil) { [weak self] _ in
+            guard let self = self else {return}
+            delog("\(#function)")
+            self.request()
+        }
     }
     //MARK: - 加载plist文件
     private lazy var contents: [Array<Dictionary<String, String>>] = {
@@ -30,6 +34,10 @@ class WeatherDetailViewController: UIViewController {
         let arr = try! NSArray(contentsOf: url, error: ())
         return arr as! [Array<Dictionary<String, String>>]
     }()
+    //MARK: - 父类
+    override func request() {
+        self.netManager.dayWeatherRequest(city: Weather.city)
+    }
     //MARK: - ui
     // 中间温度label
     private lazy var temLabel: UILabel = {
@@ -113,6 +121,7 @@ extension WeatherDetailViewController: UITableViewDelegate, UITableViewDataSourc
 }
 //MARK: - net delegate
 extension WeatherDetailViewController: DailyWordDelegate, WeaetherDelegate {
+    
     func acquireDailyWordCache(model: DailyWord) {
         self.dailyWordModel = model
         updateDailyWordData()
@@ -132,9 +141,6 @@ extension WeatherDetailViewController: DailyWordDelegate, WeaetherDelegate {
     func acquireDayWeather(model: DayWeather) {
         self.dayWeatherModel = model
         updateDayWeatherData()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
-            self.netManager.weatherRequest(type: .dayWeatherCity(Weather.city))
-        }
     }
     func acquireWeekWeather(model: WeekWeather) {
     }
@@ -144,7 +150,7 @@ extension WeatherDetailViewController: DailyWordDelegate, WeaetherDelegate {
     }
     // 获得请求数据后，需要更新
     func updateDayWeatherData() {
-        self.dayWeatherModel?.cache(key: DAYWEATHER_CACHE_KEY, cacheContainer: .hybrid)
+        self.dayWeatherModel?.cache(key: Weather.city + "-" + DAYWEATHER_CACHE_KEY, cacheContainer: .hybrid)
         self.navigationItem.title = self.dayWeatherModel!.city!
         self.temLabel.text = self.dayWeatherModel!.tem! + "℃"
         self.weaLabel.text = self.dayWeatherModel!.wea!

@@ -26,16 +26,9 @@ class SelectTableViewCell: UITableViewCell {
         iv.contentMode = .scaleAspectFit
         return iv
     }()
-    lazy var temLabel: UILabel = {
-        let label = UILabel()
-        label.text = "30  10"
-        label.textColor = .gray
-        label.font = .systemFont(ofSize: SELECT_CELL_FONT_SIZE)
-        label.adjustsFontSizeToFitWidth = true
-        return label
-    }()
     lazy var winLabel: UILabel = {
         let label = UILabel()
+        label.text = "东北风"
         label.textColor = .gray
         label.font = .systemFont(ofSize: SELECT_CELL_FONT_SIZE)
         label.adjustsFontSizeToFitWidth = true
@@ -43,17 +36,75 @@ class SelectTableViewCell: UITableViewCell {
     }()
     lazy var winSpeedLabel: UILabel = {
         let label = UILabel()
+        label.text = "4-5级转<3级"
         label.textColor = .gray
         label.font = .systemFont(ofSize: SELECT_CELL_FONT_SIZE)
         label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .left
+        label.contentMode = .center
+        return label
+    }()
+    lazy var temLabel: UILabel = {
+        let label = UILabel()
+        label.text = "30  10"
+        label.textColor = .gray
+        label.font = .systemFont(ofSize: SELECT_CELL_FONT_SIZE)
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .right
         return label
     }()
     
 }
 private extension SelectTableViewCell {
     func setupUI() {
-        
+        self.addSubview(self.cityLabel)
+        self.addSubview(self.temLabel)
+        self.addSubview(self.winLabel)
+        self.addSubview(self.weaImageView)
+        self.addSubview(self.winSpeedLabel)
+        prepareCityLabel()
+        prepareTemLabel()
+        prepareWinLabel()
+        prepareWeaImageView()
+        prepareWinSpeedLabel()
     }
-    
-    //TODO: - 布局
+    func prepareWinSpeedLabel() {
+        self.winSpeedLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(self.cityLabel.snp.centerY)
+            make.height.equalTo(self.cityLabel.snp.height)
+            make.left.equalTo(self.snp.centerX).offset(self.bounds.width * 0.12)
+            
+        }
+    }
+    func prepareWeaImageView() {
+        self.weaImageView.snp.makeConstraints { make in
+            make.centerY.equalTo(self.cityLabel.snp.centerY)
+            make.height.equalTo(self.cityLabel.snp.height).multipliedBy(0.7)
+            make.right.equalTo(self.snp.centerX).offset(-self.bounds.width * 0.14)
+            make.width.equalTo(self.cityLabel.snp.height).multipliedBy(0.7)
+        }
+    }
+    func prepareWinLabel() {
+        self.winLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(self.cityLabel.snp.centerY)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(self.cityLabel.snp.height)
+        }
+    }
+    func prepareTemLabel() {
+        self.temLabel.snp.makeConstraints { make in
+            make.height.equalTo(self.cityLabel.snp.height)
+            make.right.equalToSuperview().offset(-TOP_SPACE)
+            make.centerY.equalTo(self.cityLabel.snp.centerY)
+            make.left.equalTo(self.winSpeedLabel.snp.right).offset(TOP_SPACE * 0.5)
+            
+        }
+    }
+    func prepareCityLabel() {
+        self.cityLabel.snp.makeConstraints { make in
+            make.height.equalToSuperview().multipliedBy(0.9)
+            make.left.equalToSuperview().offset(TOP_SPACE)
+            make.centerY.equalToSuperview()
+        }
+    }
 }

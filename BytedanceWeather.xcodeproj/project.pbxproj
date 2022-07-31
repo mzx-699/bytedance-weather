@@ -15,6 +15,10 @@
 		7343CD5E288E986200A0D043 /* BytedanceWeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7343CD5D288E986200A0D043 /* BytedanceWeatherUITests.swift */; };
 		7343CD60288E986200A0D043 /* BytedanceWeatherUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7343CD5F288E986200A0D043 /* BytedanceWeatherUITestsLaunchTests.swift */; };
 		7343CD6E288FB8D200A0D043 /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7343CD6D288FB8D200A0D043 /* WeatherAPI.swift */; };
+		738A9C6D289502AC00D11994 /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738A9C6C289502AC00D11994 /* DebugLog.swift */; };
+		738A9C6F2895762900D11994 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738A9C6E2895762900D11994 /* BaseViewController.swift */; };
+		738A9C7128966C7300D11994 /* WeatherLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738A9C7028966C7300D11994 /* WeatherLocation.swift */; };
+		738A9C7328966C8F00D11994 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 738A9C7228966C8F00D11994 /* CoreLocation.framework */; };
 		73DBE6A3288FD5C30049CD54 /* WeekWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DBE6A2288FD5C30049CD54 /* WeekWeather.swift */; };
 		73DBE6A5288FD6970049CD54 /* WeekDayWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DBE6A4288FD6970049CD54 /* WeekDayWeather.swift */; };
 		73DBE6A7288FE3890049CD54 /* DayWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DBE6A6288FE3890049CD54 /* DayWeather.swift */; };
@@ -73,6 +77,10 @@
 		7343CD5D288E986200A0D043 /* BytedanceWeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BytedanceWeatherUITests.swift; sourceTree = "<group>"; };
 		7343CD5F288E986200A0D043 /* BytedanceWeatherUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BytedanceWeatherUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7343CD6D288FB8D200A0D043 /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
+		738A9C6C289502AC00D11994 /* DebugLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugLog.swift; sourceTree = "<group>"; };
+		738A9C6E2895762900D11994 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		738A9C7028966C7300D11994 /* WeatherLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherLocation.swift; sourceTree = "<group>"; };
+		738A9C7228966C8F00D11994 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		73DBE6A2288FD5C30049CD54 /* WeekWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekWeather.swift; sourceTree = "<group>"; };
 		73DBE6A4288FD6970049CD54 /* WeekDayWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDayWeather.swift; sourceTree = "<group>"; };
 		73DBE6A6288FE3890049CD54 /* DayWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayWeather.swift; sourceTree = "<group>"; };
@@ -103,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				738A9C7328966C8F00D11994 /* CoreLocation.framework in Frameworks */,
 				C08EFC6E42C07A91B905F599 /* Pods_BytedanceWeather.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,7 +160,6 @@
 		7343CD3B288E985D00A0D043 /* BytedanceWeather */ = {
 			isa = PBXGroup;
 			children = (
-				73DBE6D5289385260049CD54 /* cache */,
 				73DBE6C828925A020049CD54 /* sources */,
 				73DBE6BE28917B100049CD54 /* common */,
 				73DBE6AF2891271F0049CD54 /* view */,
@@ -207,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				7343CD40288E985D00A0D043 /* OverallViewController.swift */,
+				738A9C6E2895762900D11994 /* BaseViewController.swift */,
 				73DBE6A928911D230049CD54 /* MainViewController.swift */,
 				73DBE6AD28911DBD0049CD54 /* WeatherDetailViewController.swift */,
 				73DBE6CC2892710E0049CD54 /* SelectCityViewController.swift */,
@@ -264,6 +273,8 @@
 			children = (
 				73DBE6C328922C680049CD54 /* extesion */,
 				73DBE6BF28917B200049CD54 /* Common.swift */,
+				738A9C6C289502AC00D11994 /* DebugLog.swift */,
+				738A9C7028966C7300D11994 /* WeatherLocation.swift */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -302,13 +313,6 @@
 			path = button;
 			sourceTree = "<group>";
 		};
-		73DBE6D5289385260049CD54 /* cache */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = cache;
-			sourceTree = "<group>";
-		};
 		8891F2CB9BB982F96E5DB836 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -325,6 +329,7 @@
 		CF3D295A13BBA6407AD829A4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				738A9C7228966C8F00D11994 /* CoreLocation.framework */,
 				4725C56F9860131BAC64BF3E /* Pods_BytedanceWeather.framework */,
 				5761BB7099977FA2D9D27AFC /* Pods_BytedanceWeather_BytedanceWeatherUITests.framework */,
 				8F48278C59CF63EF1191EC79 /* Pods_BytedanceWeatherTests.framework */,
@@ -573,8 +578,10 @@
 			files = (
 				73DBE6C228917F350049CD54 /* WeatherTableViewCell.swift in Sources */,
 				73DBE6C7289256280049CD54 /* DetailTableViewCell.swift in Sources */,
+				738A9C6D289502AC00D11994 /* DebugLog.swift in Sources */,
 				73DBE6AA28911D230049CD54 /* MainViewController.swift in Sources */,
 				73DBE6A3288FD5C30049CD54 /* WeekWeather.swift in Sources */,
+				738A9C7128966C7300D11994 /* WeatherLocation.swift in Sources */,
 				73DBE6A7288FE3890049CD54 /* DayWeather.swift in Sources */,
 				73DBE6B628913B2F0049CD54 /* WeatherDelegate.swift in Sources */,
 				73DBE6C528922C8E0049CD54 /* Date+Extension.swift in Sources */,
@@ -583,6 +590,7 @@
 				7343CD6E288FB8D200A0D043 /* WeatherAPI.swift in Sources */,
 				73DBE6C028917B210049CD54 /* Common.swift in Sources */,
 				73DBE6AE28911DBD0049CD54 /* WeatherDetailViewController.swift in Sources */,
+				738A9C6F2895762900D11994 /* BaseViewController.swift in Sources */,
 				73DBE6CD289271100049CD54 /* SelectCityViewController.swift in Sources */,
 				73DBE6BA28913E010049CD54 /* DailyWord.swift in Sources */,
 				73DBE6A5288FD6970049CD54 /* WeekDayWeather.swift in Sources */,

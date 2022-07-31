@@ -6,6 +6,8 @@
 //
 
 import UIKit
+//MARK: - NotificationCenter
+let NOTIFICATION_CENTER_UPDATE_CITY = "NOTIFICATION_CENTER_UPDATE_CITY"
 //MARK: - cache
 let WEEKWEATHER_CACHE_KEY = "weekWeatherCacheKey"
 let DAYWEATHER_CACHE_KEY = "dayWeatherCacheKey"
@@ -21,7 +23,7 @@ let TOP_SPACE = 5.0
 let CENTER_TEM_FONT_SIZE = 60.0
 let DETAIL_TITLE_CELL_FONT_SIZE = 15.0
 let DETAIL_CONTENT_CELL_FONT_SIZE = 30.0
-let WEATHER_CELL_FONT_SIZE = 10.0
+let WEATHER_CELL_FONT_SIZE = 13.0
 let SELECT_CELL_FONT_SIZE = 15.0
 //MARK: - cell identifier
 let WEATHER_TABLEVIEWCELL_IDENTIFIER = "weatherCell"
@@ -74,4 +76,3 @@ func getDayWeatherMap(day: DayWeather) -> Dictionary<String, String> {
 class Weather {
     static var city = ""
 }
-

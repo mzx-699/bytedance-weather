@@ -20,8 +20,12 @@ class NetManager: NSObject {
         let _ = weatherProvider.cacheRequest(type, cacheType: .default, callbackQueue: DispatchQueue.main, progress: nil) { result in
             switch result {
             case let .success(resp):
+                let json = try! JSON(data: resp.data)
+                if json.count < 5 {
+                    break
+                }
                 if resp.statusCode == 200 {
-                    switch(type) {
+                    switch type {
                     case .weekWeather, .weekWeatherCity(_):
                         let ww = resp.mapObject(WeekWeather.self, modelKey: nil)
                         self.weatherDelegate?.acquireWeekWeather(model: ww)
@@ -30,7 +34,7 @@ class NetManager: NSObject {
                         self.weatherDelegate?.acquireDayWeather(model: dw)
                     }
                 } else if resp.statusCode == 230 {
-                    switch(type) {
+                    switch type {
                     case .weekWeather, .weekWeatherCity(_):
                         let ww = resp.mapObject(WeekWeather.self, modelKey: nil)
                         self.weatherDelegate?.acquireWeekWeatherCache(model: ww)
@@ -39,9 +43,8 @@ class NetManager: NSObject {
                         self.weatherDelegate?.acquireDayWeatherCache(model: dw)
                     }
                 }
-                break
             case let .failure(moyaError):
-                print(moyaError)
+                delog(moyaError)
                 break
             }
         }
@@ -60,8 +63,6 @@ class NetManager: NSObject {
                     let dw = DailyWord.mapModel(from: json["data"][0])
                     self.dailyWordDelegate?.acquireDailyWordCache(model: dw)
                 }
-            
-                break
             case let .failure(moyaError):
                 print(moyaError)
             }

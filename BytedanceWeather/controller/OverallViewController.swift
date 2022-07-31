@@ -9,22 +9,31 @@ import UIKit
 import Moya
 import SwiftyJSON
 import SnapKit
-class OverallViewController: UIViewController {
+class OverallViewController: BaseViewController {
 
     // 网络
     let netManager = NetManager()
     //MARK: - model
-    var dayWeatherModel: DayWeather? = DayWeather.fromCache(key: DAYWEATHER_CACHE_KEY, cacheContainer: .hybrid)
-    var weekWeatherModel: WeekWeather? = WeekWeather.fromCache(key: WEEKWEATHER_CACHE_KEY, cacheContainer: .hybrid)
+    var dayWeatherModel: DayWeather? = DayWeather.fromCache(key: Weather.city + "-" + DAYWEATHER_CACHE_KEY, cacheContainer: .hybrid)
+    var weekWeatherModel: WeekWeather? = WeekWeather.fromCache(key: Weather.city + "-" + WEEKWEATHER_CACHE_KEY, cacheContainer: .hybrid)
     var weekdays: [String] = ["01号(今天)", "02号(明天)", "03号(后天)", "04号(周一)", "05号(周三)", "06号(周四)", "07号(周五)"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.weekdays = getWeekDays(days: self.weekWeatherModel?.data ?? nil)
         setupUI()
         initNetDelegate()
-        self.netManager.weekWeatherRequest(city: Weather.city)
+        request()
+        self.weekdays = getWeekDays(days: self.weekWeatherModel?.data ?? nil)
+        NotificationCenter.default.addObserver(forName: .init(rawValue: NOTIFICATION_CENTER_UPDATE_CITY), object: nil, queue: nil) { [weak self] _ in
+            guard let self = self else {return}
+            self.request()
+        }
+    }
+    
+    //MARK: - 父类
+    override func request() {
         self.netManager.dayWeatherRequest(city: Weather.city)
-        
+        self.netManager.weekWeatherRequest(city: Weather.city)
     }
     //MARK: - ui
     // 中间温度label
@@ -81,7 +90,14 @@ class OverallViewController: UIViewController {
         btn.addTarget(self, action: #selector(rightSelectBtnClick), for: .touchUpInside)
         return btn
     }()
-    
+    private lazy var navRightUpdateBtn: WeatherNavButton = {
+        let btn = WeatherNavButton()
+        btn.multiple = 0.75
+        btn.contentMode = .scaleAspectFit
+        btn.setImage(UIImage(named: "current"), for: .normal)
+        btn.addTarget(self, action: #selector(rightUpdateBtnClick), for: .touchUpInside)
+        return btn
+    }()
 }
 
 //MARK: - tableview delegate & datasouce
@@ -115,27 +131,18 @@ extension OverallViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
-
 //MARK: - net delegate
 extension OverallViewController: WeaetherDelegate {
-    
     func initNetDelegate() {
         self.netManager.weatherDelegate = self
     }
     func acquireDayWeather(model: DayWeather) {
         self.dayWeatherModel = model
         updateDayWeatherData()
-        // 开启延时任务
-        DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
-            self.netManager.dayWeatherRequest(city: Weather.city)
-        }
     }
     func acquireWeekWeather(model: WeekWeather) {
         self.weekWeatherModel = model
         updateWeekWeatherData()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
-            self.netManager.weekWeatherRequest(city: Weather.city)
-        }
     }
     func acquireDayWeatherCache(model: DayWeather) {
         self.dayWeatherModel = model
@@ -147,17 +154,16 @@ extension OverallViewController: WeaetherDelegate {
     }
     // 获得请求数据后，需要更新
     func updateDayWeatherData() {
-        self.weekWeatherModel?.cache(key: WEEKWEATHER_CACHE_KEY, cacheContainer: .hybrid)
-        self.dayWeatherModel?.cache(key: DAYWEATHER_CACHE_KEY, cacheContainer: .hybrid)
+        self.dayWeatherModel?.cache(key: Weather.city + "-" + DAYWEATHER_CACHE_KEY, cacheContainer: .hybrid)
         self.navigationItem.title = self.dayWeatherModel!.city!
         self.temLabel.text = self.dayWeatherModel!.tem! + "℃"
         let temDay = self.dayWeatherModel!.temDay!
         let temNight = self.dayWeatherModel!.temNight!
         self.centerTemLabel.text = "最高温度: " + temDay + "℃ 最低温度: " + temNight + "℃"
         self.weaLabel.text = self.dayWeatherModel!.wea!
-        
     }
     func updateWeekWeatherData() {
+        self.weekWeatherModel?.cache(key: Weather.city + "-" + WEEKWEATHER_CACHE_KEY, cacheContainer: .hybrid)
         self.weekdays = getWeekDays(days: (self.weekWeatherModel?.data)!)
         forecastTableView.reloadData()
         
@@ -171,6 +177,51 @@ private extension OverallViewController {
         let vc = SelectCityViewController()
         vc.city = self.dayWeatherModel?.city ?? "北京"
         self.navigationController?.pushViewController(vc, animated: false)
+    }
+    
+    @objc func rightUpdateBtnClick() {
+        delog("\(#function)")
+        endTimer()
+        WeatherLocation.shareInstance.getLocationInfo = { [weak self] _, _, _city, _ in
+            guard let self = self else {return}
+            if let currCity = _city {
+                // 截取掉市
+                let l = currCity.count
+                let start = currCity.startIndex
+                let end = currCity.index(start, offsetBy: l - 1)
+                let subCity = String(currCity[start..<end])
+                // 弹框是否要更新到所在城市
+                let alertController = UIAlertController(title: "定位到你所在的城市", message: "当前所在城市为: "+subCity, preferredStyle: .alert)
+                let done = UIAlertAction(title: "确认", style: .default) { _ in
+                    // 修改city相关
+                    let oldCity = self.dayWeatherModel!.city!
+                    var citys: [String] = UserDefaults.standard.array(forKey: "citys") as? [String] ?? []
+                    // old 不在集合里，就放进去
+                    if citys.firstIndex(of: oldCity) == nil {
+                        citys.append(oldCity)
+                    }
+                    // new 在集合里就删掉
+                    if let idx = citys.firstIndex(of: subCity) {
+                        citys.remove(at: idx)
+                    }
+                    UserDefaults.standard.set(subCity, forKey: "city")
+                    UserDefaults.standard.set(citys, forKey: "citys")
+                    // 更新全局city
+                    Weather.city = subCity
+                    UserDefaults.standard.synchronize()
+                    NotificationCenter.default.post(name: .init(rawValue: NOTIFICATION_CENTER_UPDATE_CITY), object: nil)
+                    self.startTimer()
+                }
+                let cancel = UIAlertAction(title: "取消", style: .cancel) { _ in
+                    self.startTimer()
+                }
+                alertController.addAction(done)
+                alertController.addAction(cancel)
+                self.present(alertController, animated: false, completion: nil)
+            }
+            
+        }
+        WeatherLocation.shareInstance.startLoaction()
     }
 }
 
@@ -221,9 +272,12 @@ extension OverallViewController {
         self.navigationItem.title = self.dayWeatherModel?.city ?? "北京"
         let height = navigationController?.navigationBar.frame.size.height ?? 44.0
         self.navRightSelectBtn.frame = CGRect(x: 0, y: 0, width: height, height: height)
-        let v = UIView(frame: self.navRightSelectBtn.frame)
-        v.addSubview(self.navRightSelectBtn)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: v)
+        let vSelect = UIView(frame: self.navRightSelectBtn.frame)
+        vSelect.addSubview(self.navRightSelectBtn)
+        self.navRightUpdateBtn.frame = CGRect(x: 0, y: 0, width: height, height: height)
+        let vUpdate = UIView(frame: self.navRightUpdateBtn.frame)
+        vUpdate.addSubview(self.navRightUpdateBtn)
+        self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: vSelect), UIBarButtonItem(customView: vUpdate)]
     }
 }
 

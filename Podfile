@@ -10,6 +10,9 @@ target 'BytedanceWeather' do
   pod "ESTabBarController-swift"
   pod 'MoyaMapper'
   pod 'MoyaMapper/MMCache'
+  pod 'Toast-Swift', '~> 5.0.1'
+  pod 'SVProgressHUD'
+  pod 'ReachabilitySwift'
   # Pods for BytedanceWeather
 
   target 'BytedanceWeatherTests' do
