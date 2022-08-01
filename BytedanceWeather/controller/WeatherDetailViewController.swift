@@ -82,6 +82,7 @@ class WeatherDetailViewController: BaseViewController {
         tv.showsVerticalScrollIndicator = false
         tv.separatorStyle = .singleLine
         tv.isScrollEnabled = false
+        tv.tableFooterView = UIView()
         tv.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         return tv
     }()

@@ -79,6 +79,7 @@ class OverallViewController: BaseViewController {
         tv.showsVerticalScrollIndicator = false
         tv.isScrollEnabled = false
         tv.separatorStyle = .singleLine
+        tv.tableFooterView = UIView()
         tv.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         return tv
     }()

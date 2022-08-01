@@ -582,7 +582,7 @@
 		979486118B3E90C08386079D57962701 /* SnapKit */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SnapKit; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		99780A093A6D5B85BFE137B08C3A5264 /* ESTabBarController-swift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "ESTabBarController-swift.modulemap"; sourceTree = "<group>"; };
 		9A5495C8BF65B22D06C0A0573BAF4BA8 /* Moya-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Moya-umbrella.h"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A15DFDF1D01861E9DD80929DE1B62AA9 /* MoyaMapper-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MoyaMapper-umbrella.h"; sourceTree = "<group>"; };
 		A2287E9DC3C4C3FB871C4B9A7F0753C0 /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SVRadialGradientLayer.h; path = SVProgressHUD/SVRadialGradientLayer.h; sourceTree = "<group>"; };
 		A39442553DCC6B11185E5F51502A648E /* Toast-Swift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Toast-Swift.modulemap"; sourceTree = "<group>"; };
@@ -653,7 +653,7 @@
 		D852D397798A1EB036614622DFFEED69 /* LayoutConstraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutConstraint.swift; path = Source/LayoutConstraint.swift; sourceTree = "<group>"; };
 		D8950A36F580BDBC89A0343DAE614E71 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
 		D8AD264D73DDE13955AE671CE10BEE93 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		D90933A6AFB121327057280D8FE04349 /* en.lproj */ = {isa = PBXFileReference; includeInIndex = 1; name = en.lproj; path = Sources/en.lproj; sourceTree = "<group>"; };
+		D90933A6AFB121327057280D8FE04349 /* en.lproj */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = en.lproj; path = Sources/en.lproj; sourceTree = "<group>"; };
 		DD02FF4523A46C9BE063F36E13B820E7 /* MultipartFormData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultipartFormData.swift; path = Source/MultipartFormData.swift; sourceTree = "<group>"; };
 		DD955B22607408521C5C3DDEFBAE20B2 /* Pods-BytedanceWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BytedanceWeather.debug.xcconfig"; sourceTree = "<group>"; };
 		E104F4BE7CBF758D62BD947333BF9D2B /* MemoryConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MemoryConfig.swift; path = Source/Shared/Configuration/MemoryConfig.swift; sourceTree = "<group>"; };
@@ -662,7 +662,7 @@
 		E19828AEDEAEED68BC6D262E506840C7 /* ConstraintLayoutGuide+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ConstraintLayoutGuide+Extensions.swift"; path = "Source/ConstraintLayoutGuide+Extensions.swift"; sourceTree = "<group>"; };
 		E221B48571B33CA0FEC8F76C1BAF5A99 /* SwiftyJSON.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.debug.xcconfig; sourceTree = "<group>"; };
 		E23C076BA70925415F490FEDB215DA92 /* SwiftyJSON */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftyJSON; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E320F44579BD84190B309A1E46E46964 /* MoyaMapper */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MoyaMapper; path = MoyaMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E320F44579BD84190B309A1E46E46964 /* MoyaMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MoyaMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E37611CC3575A38D9FCC5A243F58EFBD /* ConstraintLayoutGuideDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutGuideDSL.swift; path = Source/ConstraintLayoutGuideDSL.swift; sourceTree = "<group>"; };
 		E3FD4557A04B647E536C55E88C714177 /* AnyEncodable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnyEncodable.swift; path = Sources/Moya/AnyEncodable.swift; sourceTree = "<group>"; };
 		E478AEF04154047D45E0DCF2993946D4 /* ValidationType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ValidationType.swift; path = Sources/Moya/ValidationType.swift; sourceTree = "<group>"; };
@@ -858,7 +858,6 @@
 				9D9E50716FA969B5999E855B6D917509 /* Core */,
 				635FAFE1D6AFB3255248FDE086EC2CB7 /* Support Files */,
 			);
-			name = Moya;
 			path = Moya;
 			sourceTree = "<group>";
 		};
@@ -920,7 +919,6 @@
 				217347844E1286D95A09C42E20F802BA /* Validation.swift */,
 				3E8BC6AADBA34F0D136FD471FACEEDF8 /* Support Files */,
 			);
-			name = Alamofire;
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
@@ -1051,7 +1049,6 @@
 				0D653A829E452D934062656E3F26971A /* Resources */,
 				8BCFDAA45ED5CFFDC1773C7B0CAF1ABF /* Support Files */,
 			);
-			name = SVProgressHUD;
 			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
@@ -1062,7 +1059,7 @@
 				736B64357A6C420C3A7062C6D479AC7F /* Cache */,
 				F6D00CA03F52F8332AAD8FEEC4AFD406 /* ESTabBarController-swift */,
 				3756A9BBE41ABEE8DCBF5BCA6972C4DA /* Moya */,
-				E320F44579BD84190B309A1E46E46964 /* MoyaMapper */,
+				E320F44579BD84190B309A1E46E46964 /* MoyaMapper.framework */,
 				1AB5B95FB536C52F496B02E3295EA125 /* Pods-BytedanceWeather */,
 				01CA1E1E28577A5A2F57D1C0E1CE33A8 /* Pods-BytedanceWeather-BytedanceWeatherUITests */,
 				FF1A07B886179B095338CA15D089A813 /* Pods-BytedanceWeatherTests */,
@@ -1081,7 +1078,6 @@
 				44C5EB87F5070F4FCB5849FE8C574074 /* Reachability.swift */,
 				7F82A47E110A611A2658CE480ED2F142 /* Support Files */,
 			);
-			name = ReachabilitySwift;
 			path = ReachabilitySwift;
 			sourceTree = "<group>";
 		};
@@ -1171,7 +1167,6 @@
 				A5AAD3BA011A969905FC3AB7CF02FC5C /* UILayoutSupport+Extensions.swift */,
 				754E811F306B0C0AFEC359E433FF892E /* Support Files */,
 			);
-			name = SnapKit;
 			path = SnapKit;
 			sourceTree = "<group>";
 		};
@@ -1181,7 +1176,6 @@
 				B1AD2961FC2367CE4F7F60DCB61C8228 /* SwiftyJSON.swift */,
 				AD5CE0E26F1464C676D9CF9BF8C5D6B0 /* Support Files */,
 			);
-			name = SwiftyJSON;
 			path = SwiftyJSON;
 			sourceTree = "<group>";
 		};
@@ -1206,7 +1200,6 @@
 				62D819ABD770E18D8597294903C76166 /* Toast.swift */,
 				56DA3077C51681C75442834A1B070E62 /* Support Files */,
 			);
-			name = "Toast-Swift";
 			path = "Toast-Swift";
 			sourceTree = "<group>";
 		};
@@ -1217,7 +1210,6 @@
 				5B616C2E0E786FAA11AED04C7DC3FBA5 /* MMCache */,
 				2A799F9FD048454C6393446F9B0C2CAC /* Support Files */,
 			);
-			name = MoyaMapper;
 			path = MoyaMapper;
 			sourceTree = "<group>";
 		};
@@ -1234,7 +1226,6 @@
 				ED0BA095F833F02FA9234E4E9B8CFF02 /* Resources */,
 				84DEDEB3AFF5829C9D25284E022EB86B /* Support Files */,
 			);
-			name = "ESTabBarController-swift";
 			path = "ESTabBarController-swift";
 			sourceTree = "<group>";
 		};
@@ -1389,7 +1380,6 @@
 				368691B8318436F41CF50BB516390905 /* UIImage+Extensions.swift */,
 				A6F05ABB56C57DBD5EB6EBD36641EBCA /* Support Files */,
 			);
-			name = Cache;
 			path = Cache;
 			sourceTree = "<group>";
 		};
@@ -1642,7 +1632,7 @@
 			);
 			name = MoyaMapper;
 			productName = MoyaMapper;
-			productReference = E320F44579BD84190B309A1E46E46964 /* MoyaMapper */;
+			productReference = E320F44579BD84190B309A1E46E46964 /* MoyaMapper.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		AC89CEABC84956717CF8C8536809AF24 /* Pods-BytedanceWeather */ = {
@@ -2455,7 +2445,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/MoyaMapper/MoyaMapper-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/MoyaMapper/MoyaMapper-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2767,7 +2757,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/MoyaMapper/MoyaMapper-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/MoyaMapper/MoyaMapper-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

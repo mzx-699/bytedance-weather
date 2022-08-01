@@ -8,7 +8,7 @@
 import Foundation
 import Moya
 import SwiftyJSON
-
+/// 网络层
 class NetManager: NSObject {
     
     weak var weatherDelegate : WeaetherDelegate?

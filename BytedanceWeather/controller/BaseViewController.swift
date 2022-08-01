@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+/// 控制定时器的基类
 class BaseViewController: UIViewController {
 
     var timer: Timer?
@@ -24,14 +24,13 @@ class BaseViewController: UIViewController {
         endTimer()
     }
     func startTimer() {
-        delog("\(#function)")
         timer = .scheduledTimer(withTimeInterval: 60, repeats: true, block: { [weak self] _ in
             guard let self = self else {return}
-//            self.request()
+            // 开启定时任务
+            self.request()
         })
     }
     func endTimer() {
-        delog("\(#function)")
         timer?.invalidate()
         if timer != nil {
             timer = nil

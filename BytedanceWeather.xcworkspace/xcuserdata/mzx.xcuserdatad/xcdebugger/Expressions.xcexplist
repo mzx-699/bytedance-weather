@@ -3,7 +3,15 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "closure #2 in closure #1 in SelectCityViewController.addBtnClick():SelectCityViewController.swift">
+         contextName = "DailyWordModel.init(json:):DailyWordModel.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in OverallViewController.rightUpdateBtnClick():OverallViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "citys.firstIndex(of: oldCity)">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "OverallViewController.updateDayWeatherData():OverallViewController.swift">
@@ -22,26 +30,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "getWeekDays(days:):Common.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "Date.getWeekDay(dateString: &quot;2022-8-6&quot;) % 7">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #1 in OverallViewController.rightUpdateBtnClick():OverallViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "citys.firstIndex(of: oldCity)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "SelectCityViewController.doChangeCity(changeCity:):SelectCityViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "self.selectCitys">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "getWeekDays(days:):Common.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Date.getWeekDay(dateString: &quot;2022-8-6&quot;) % 7">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -65,10 +65,26 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "SelectCityViewController.tableView(_:cellForRowAt:):SelectCityViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cell.cityLabel.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in NetManager.weatherRequest(type:):NetManager.swift">
          <PersistentStrings>
             <PersistentString
                value = "JSON(data: resp.data)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #1 in SelectCityViewController.changeBtnClick():SelectCityViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.currentCityModel">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -82,6 +98,20 @@
       </ContextState>
       <ContextState
          contextName = "OverallViewController.acquireDailyWord(model:):OverallViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "SelectCityViewController.updateDayWeatherModel(model:):SelectCityViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.currentCityModel">
+            </PersistentString>
+            <PersistentString
+               value = "self.city">
+            </PersistentString>
+            <PersistentString
+               value = "model.city">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "closure #1 in closure #1 in SelectCityViewController.addBtnClick():SelectCityViewController.swift">
@@ -142,13 +172,13 @@
          contextName = "WeatherLocation.getGeocoderInfoFor(Location:):WeatherLocation.swift">
          <PersistentStrings>
             <PersistentString
-               value = "location.coordinate.longitude">
+               value = "reachability.connection">
             </PersistentString>
             <PersistentString
                value = "location.coordinate.latitude">
             </PersistentString>
             <PersistentString
-               value = "reachability.connection">
+               value = "location.coordinate.longitude">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -175,6 +205,9 @@
          contextName = "WeatherNavButton.imageRect(forContentRect:):WeatherNavButton.swift">
       </ContextState>
       <ContextState
+         contextName = "closure #2 in closure #1 in SelectCityViewController.addBtnClick():SelectCityViewController.swift">
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in NetManager.dailyWordRequest(type:):NetManager.swift">
          <PersistentStrings>
             <PersistentString
@@ -187,9 +220,6 @@
       </ContextState>
       <ContextState
          contextName = "WeatherLocation.locationManager(_:didUpdateLocations:):WeatherLocation.swift">
-      </ContextState>
-      <ContextState
-         contextName = "DailyWordModel.init(json:):DailyWordModel.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

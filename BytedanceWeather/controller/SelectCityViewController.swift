@@ -14,6 +14,7 @@ class SelectCityViewController: BaseViewController {
     // 网络
     let netManager = NetManager()
     var city = ""
+    var flag = false
     private var currentCityModel: DayWeather?
     private var citysModelMap: [Int : DayWeather] = [:]
     private var selectCitys: [String] = {
@@ -75,6 +76,7 @@ class SelectCityViewController: BaseViewController {
         tv.isScrollEnabled = false;
         tv.tag = 2
         tv.bounces = false
+        tv.tableFooterView = UIView()
         tv.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         return tv
     }()
@@ -142,7 +144,9 @@ extension SelectCityViewController: WeaetherDelegate {
             self.citysModelMap[idx] = model
             model.cache(key: model.city! + "-" + DAYWEATHER_CACHE_KEY, cacheContainer: .hybrid)
             self.citysTableView.reloadData()
-            if (self.citysTableView.isScrollEnabled) {
+            // 只有添加的时候才能滚动
+            if (self.citysTableView.isScrollEnabled && self.flag) {
+                self.flag = false
                 let indexPath = NSIndexPath(row: self.selectCitys.count - 1, section: 0) as IndexPath
                 self.citysTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
             }
@@ -157,7 +161,7 @@ extension SelectCityViewController: UITableViewDelegate, UITableViewDataSource {
         if tableView.tag == 1 {
             return 1
         } else if tableView.tag == 2 {
-            if CGFloat(self.selectCitys.count) * SCREEN_HEIGHT * 0.075 > SCREEN_HEIGHT * 0.5 {
+            if CGFloat(self.selectCitys.count) * SCREEN_HEIGHT * 0.075 > tableView.frame.height {
                 tableView.isScrollEnabled = true
             } else {
                 tableView.isScrollEnabled = false
@@ -193,7 +197,10 @@ extension SelectCityViewController: UITableViewDelegate, UITableViewDataSource {
         }
         return cell
     }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! SelectTableViewCell
+        cell.isSelected = false
+    }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return SCREEN_HEIGHT * 0.075
     }
@@ -241,6 +248,7 @@ extension SelectCityViewController: UITableViewDelegate, UITableViewDataSource {
 }
 //MARK: - btn click
 private extension SelectCityViewController {
+    //TODO: - 接口bug 传安徽 返回北京
     @objc func changeBtnClick() {
         delog("\(#function)")
         endTimer()
@@ -249,7 +257,7 @@ private extension SelectCityViewController {
         alertController.addAction(UIAlertAction(title: "确认", style: .default, handler: { [weak self] alertAction in
             guard let self = self else {return}
             let changeCity = alertController.textFields?[0].text ?? ""
-            if changeCity == "" || changeCity == self.city {
+            if changeCity == "" {
                 // 重启定时器
                 self.startTimer()
                 return
@@ -270,6 +278,7 @@ private extension SelectCityViewController {
                             style.maxWidthPercentage = 0.8
                             self.view.makeToast("请输入正确的城市", duration: 1, position: .center, style: style)
                         } else {
+                            self.currentCityModel = resp.mapObject(DayWeather.self, modelKey: nil)
                             self.doChangeCity(changeCity: changeCity)
                         }
                     }
@@ -317,7 +326,9 @@ private extension SelectCityViewController {
                                 self.selectCitys.append(addCity)
                                 UserDefaults.standard.set(self.selectCitys, forKey: "citys")
                                 UserDefaults.standard.synchronize()
+                                self.flag = true
                                 self.request()
+                                
                             }
                         }
                     }
@@ -418,8 +429,11 @@ private extension SelectCityViewController {
 private extension SelectCityViewController {
     func doChangeCity(changeCity: String) {
         let oldCity = self.city
-        // 旧城市添加进去
-        self.selectCitys.append(oldCity)
+        if oldCity != "" && self.selectCitys.firstIndex(of: oldCity) == nil {
+            // 旧城市添加进去
+            self.selectCitys.append(oldCity)
+            self.flag = true
+        }
         // 新城市删掉
         if let idx = self.selectCitys.firstIndex(of: changeCity) {
             self.selectCitys.remove(at: idx)
