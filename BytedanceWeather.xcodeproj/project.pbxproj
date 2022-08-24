@@ -183,7 +183,6 @@
 				73DBE6A1288FC8C00049CD54 /* model */,
 				7343CD6C288FB88F00A0D043 /* net */,
 				7343CD3C288E985D00A0D043 /* AppDelegate.swift */,
-				7343CD45288E986100A0D043 /* Assets.xcassets */,
 				7343CD47288E986100A0D043 /* LaunchScreen.storyboard */,
 				7343CD4A288E986100A0D043 /* Info.plist */,
 				73DBE6D8289386E50049CD54 /* BytedanceWeather-Bridging-Header.h */,
@@ -307,6 +306,7 @@
 		73DBE6C828925A020049CD54 /* sources */ = {
 			isa = PBXGroup;
 			children = (
+				7343CD45288E986100A0D043 /* Assets.xcassets */,
 				73DBE6C928925A170049CD54 /* details.plist */,
 			);
 			path = sources;

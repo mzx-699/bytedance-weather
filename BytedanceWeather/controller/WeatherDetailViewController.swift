@@ -9,8 +9,8 @@ import UIKit
 
 class WeatherDetailViewController: BaseViewController {
 
-    // 网络
-    let netManager = NetManager()
+    
+    var netManager = NetManager()
     //MARK: - model
     var dayWeatherModel: DayWeather? = DayWeather.fromCache(key: Weather.city + "-" + DAYWEATHER_CACHE_KEY, cacheContainer: .hybrid)
     var dailyWordModel: DailyWord? = DailyWord.fromCache(key: DAILYWORD_CACHE_KEY, cacheContainer: .hybrid)
@@ -26,6 +26,10 @@ class WeatherDetailViewController: BaseViewController {
             delog("\(#function)")
             self.request()
         }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.title = Weather.city
+        super.viewWillAppear(animated)
     }
     //MARK: - 加载plist文件
     private lazy var contents: [Array<Dictionary<String, String>>] = {
@@ -128,13 +132,6 @@ extension WeatherDetailViewController: DailyWordDelegate, WeaetherDelegate {
         updateDailyWordData()
     }
     
-    func acquireWeekWeatherCache(model: WeekWeather) {}
-    
-    func acquireDayWeatherCache(model: DayWeather) {
-        self.dayWeatherModel = model
-        updateDayWeatherData()
-    }
-    
     func initNetDelegate() {
         self.netManager.weatherDelegate = self
         self.netManager.dailyWordDelegate = self
@@ -152,18 +149,21 @@ extension WeatherDetailViewController: DailyWordDelegate, WeaetherDelegate {
     // 获得请求数据后，需要更新
     func updateDayWeatherData() {
         self.dayWeatherModel?.cache(key: Weather.city + "-" + DAYWEATHER_CACHE_KEY, cacheContainer: .hybrid)
-        self.navigationItem.title = self.dayWeatherModel!.city!
-        self.temLabel.text = self.dayWeatherModel!.tem! + "℃"
-        self.weaLabel.text = self.dayWeatherModel!.wea!
-        self.dayWeatherMap = getDayWeatherMap(day: self.dayWeatherModel!)
-        detailTableView.reloadData()
+        DispatchQueue.main.async {
+            self.temLabel.text = self.dayWeatherModel!.tem! + "℃"
+            self.weaLabel.text = self.dayWeatherModel!.wea!
+            self.dayWeatherMap = getDayWeatherMap(day: self.dayWeatherModel!)
+            self.detailTableView.reloadData()
+        }
         
     }
     func updateDailyWordData() {
         self.dailyWordModel?.cache(key: DAILYWORD_CACHE_KEY, cacheContainer: .hybrid)
-        self.centerDailyWordLabel.text = self.dailyWordModel!.content
-        self.detailTableView.snp.updateConstraints { make in
-            make.top.equalTo(self.centerDailyWordLabel.snp.bottom).offset(TOP_SPACE * 2)
+        DispatchQueue.main.async {
+            self.centerDailyWordLabel.text = self.dailyWordModel!.content
+            self.detailTableView.snp.updateConstraints { make in
+                make.top.equalTo(self.centerDailyWordLabel.snp.bottom).offset(TOP_SPACE * 2)
+            }
         }
     }
     
@@ -211,7 +211,7 @@ private extension WeatherDetailViewController {
         }
     }
     func setupNav() {
-        self.navigationItem.title = self.dayWeatherModel?.city ?? "北京"
+        self.navigationItem.title = Weather.city
         
     }
 }

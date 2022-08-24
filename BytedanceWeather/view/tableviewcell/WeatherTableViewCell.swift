@@ -50,6 +50,7 @@ class WeatherTableViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "30  10"
         label.textColor = .gray
+        label.textAlignment = .right
         label.font = .systemFont(ofSize: WEATHER_CELL_FONT_SIZE)
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -74,6 +75,7 @@ extension WeatherTableViewCell {
             make.centerY.equalTo(self.dateLabel.snp.centerY)
             make.height.equalTo(self.dateLabel.snp.height)
             make.left.equalTo(self.snp.centerX).offset(self.bounds.width * 0.12)
+            make.right.equalTo(self.temLabel.snp.left).offset(-TOP_SPACE * 0.5)
         }
     }
     func prepareWeaImageView() {

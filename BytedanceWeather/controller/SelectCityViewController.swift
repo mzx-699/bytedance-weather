@@ -11,9 +11,7 @@ import SwiftyJSON
 import Moya
 class SelectCityViewController: BaseViewController {
     
-    // 网络
-    let netManager = NetManager()
-    var city = ""
+    var netManager = NetManager()
     var flag = false
     private var currentCityModel: DayWeather?
     private var citysModelMap: [Int : DayWeather] = [:]
@@ -29,7 +27,7 @@ class SelectCityViewController: BaseViewController {
     }
     //MARK: - 父类
     override func request() {
-        self.netManager.dayWeatherRequest(city: self.city)
+        self.netManager.dayWeatherRequest(city: Weather.city)
         self.selectCitys.forEach { c in
             self.netManager.dayWeatherRequest(city: c)
         }
@@ -115,7 +113,7 @@ class SelectCityViewController: BaseViewController {
 //MARK: - net delegate
 extension SelectCityViewController: WeaetherDelegate {
     func readCache() {
-        self.currentCityModel = DayWeather.fromCache(key: self.city + "-" + DAYWEATHER_CACHE_KEY, cacheContainer: .hybrid)
+        self.currentCityModel = DayWeather.fromCache(key: Weather.city + "-" + DAYWEATHER_CACHE_KEY, cacheContainer: .hybrid)
         for idx in 0..<self.selectCitys.count {
             self.citysModelMap[idx] = DayWeather.fromCache(key: self.selectCitys[idx] + "-" + DAYWEATHER_CACHE_KEY, cacheContainer: .hybrid)
         }
@@ -128,27 +126,23 @@ extension SelectCityViewController: WeaetherDelegate {
     func acquireDayWeather(model: DayWeather) {
         updateDayWeatherModel(model: model)
     }
-    
-    func acquireWeekWeatherCache(model: WeekWeather) {}
-    
-    func acquireDayWeatherCache(model: DayWeather) {
-        updateDayWeatherModel(model: model)
-    }
     func updateDayWeatherModel(model: DayWeather) {
-        if (model.city == self.city) {
-            self.currentCityModel = model
-            self.currentCityModel?.cache(key: self.city + "-" + DAYWEATHER_CACHE_KEY, cacheContainer: .hybrid)
-            self.currentTableView.reloadData()
-        } else {
-            let idx = self.selectCitys.firstIndex(of: model.city!)!
-            self.citysModelMap[idx] = model
-            model.cache(key: model.city! + "-" + DAYWEATHER_CACHE_KEY, cacheContainer: .hybrid)
-            self.citysTableView.reloadData()
-            // 只有添加的时候才能滚动
-            if (self.citysTableView.isScrollEnabled && self.flag) {
-                self.flag = false
-                let indexPath = NSIndexPath(row: self.selectCitys.count - 1, section: 0) as IndexPath
-                self.citysTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        DispatchQueue.main.async {
+            if (model.city == Weather.city) {
+                self.currentCityModel = model
+                self.currentCityModel?.cache(key: Weather.city + "-" + DAYWEATHER_CACHE_KEY, cacheContainer: .hybrid)
+                self.currentTableView.reloadData()
+            } else {
+                let idx = self.selectCitys.firstIndex(of: model.city!)!
+                self.citysModelMap[idx] = model
+                model.cache(key: model.city! + "-" + DAYWEATHER_CACHE_KEY, cacheContainer: .hybrid)
+                self.citysTableView.reloadData()
+                // 只有添加的时候才能滚动
+                if (self.citysTableView.isScrollEnabled && self.flag) {
+                    self.flag = false
+                    let indexPath = NSIndexPath(row: self.selectCitys.count - 1, section: 0) as IndexPath
+                    self.citysTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                }
             }
         }
     }
@@ -177,7 +171,7 @@ extension SelectCityViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: SELECT_TABLEVIEWCELL_IDENTIFIER, for: indexPath) as! SelectTableViewCell
         if (tableView.tag == 1) {
             let current = self.currentCityModel
-            cell.cityLabel.text = current?.city ?? self.city
+            cell.cityLabel.text = current?.city ?? Weather.city
             cell.weaImageView.image = UIImage(named: current?.weaImg ?? "qing")
             cell.winLabel.text = current?.win ?? "东北风"
             cell.winSpeedLabel.text = current?.winSpeed ?? "4-5级转<3级"
@@ -428,7 +422,7 @@ private extension SelectCityViewController {
 //MARK: - common
 private extension SelectCityViewController {
     func doChangeCity(changeCity: String) {
-        let oldCity = self.city
+        let oldCity = Weather.city
         if oldCity != "" && self.selectCitys.firstIndex(of: oldCity) == nil {
             // 旧城市添加进去
             self.selectCitys.append(oldCity)
@@ -441,8 +435,6 @@ private extension SelectCityViewController {
         // 更新用户数据
         UserDefaults.standard.set(changeCity, forKey: "city")
         UserDefaults.standard.set(self.selectCitys, forKey: "citys")
-        // 更新全局
-        self.city = changeCity
         Weather.city = changeCity
         UserDefaults.standard.synchronize()
         request()

@@ -8,9 +8,9 @@
 import Foundation
 import Moya
 //91746479 42679832
-let WEATHER_APPID = "42679832"
+let WEATHER_APPID = "91746479"
 //tMVHOC5N XaqZ7ZKt
-let WEATHER_APPSECRET = "XaqZ7ZKt"
+let WEATHER_APPSECRET = "tMVHOC5N"
 
 enum WeatherAPI: Equatable {
     

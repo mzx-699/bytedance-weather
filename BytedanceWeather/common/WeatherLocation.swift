@@ -174,7 +174,7 @@ extension WeatherLocation {
             
             if _auth == nil || _auth == .denied || _auth == .restricted {
                 SVProgressHUD.dismiss()
-                openSetting(urlString: "prefs:root=LOCATION_SERVICES")
+                openSetting(urlString: UIApplication.openSettingsURLString)
                 return
             }
             

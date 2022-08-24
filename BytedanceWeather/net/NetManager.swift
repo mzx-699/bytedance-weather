@@ -11,13 +11,14 @@ import SwiftyJSON
 /// 网络层
 class NetManager: NSObject {
     
-    weak var weatherDelegate : WeaetherDelegate?
-    weak var dailyWordDelegate : DailyWordDelegate?
+    var weatherDelegate : WeaetherDelegate?
+    var dailyWordDelegate : DailyWordDelegate?
     let weatherProvider = MoyaProvider<WeatherAPI>()
     let dailyWordProvider = MoyaProvider<DailyWordAPI>()
     
+    
     func weatherRequest(type: WeatherAPI) {
-        let _ = weatherProvider.cacheRequest(type, cacheType: .default, callbackQueue: DispatchQueue.main, progress: nil) { result in
+        let _ = weatherProvider.cacheRequest(type, cacheType: .default, callbackQueue: DispatchQueue.global(), progress: nil) { result in
             switch result {
             case let .success(resp):
                 let json = try! JSON(data: resp.data)
@@ -37,10 +38,10 @@ class NetManager: NSObject {
                     switch type {
                     case .weekWeather, .weekWeatherCity(_):
                         let ww = resp.mapObject(WeekWeather.self, modelKey: nil)
-                        self.weatherDelegate?.acquireWeekWeatherCache(model: ww)
+                        self.weatherDelegate?.acquireWeekWeather(model: ww)
                     case .dayWeather, .dayWeatherCity(_):
                         let dw = resp.mapObject(DayWeather.self, modelKey: nil)
-                        self.weatherDelegate?.acquireDayWeatherCache(model: dw)
+                        self.weatherDelegate?.acquireDayWeather(model: dw)
                     }
                 }
             case let .failure(moyaError):
@@ -51,7 +52,7 @@ class NetManager: NSObject {
     }
     
     func dailyWordRequest(type: DailyWordAPI) {
-        let _ = dailyWordProvider.cacheRequest(type, cacheType: .default, callbackQueue: DispatchQueue.main, progress: nil) { result in
+        let _ = dailyWordProvider.cacheRequest(type, cacheType: .default, callbackQueue: DispatchQueue.global(), progress: nil) { result in
             switch result {
             case let .success(resp):
                 if resp.statusCode == 200 {
@@ -61,7 +62,7 @@ class NetManager: NSObject {
                 } else if resp.statusCode == 230 {
                     let json = try! JSON(data: resp.data)
                     let dw = DailyWord.mapModel(from: json["data"][0])
-                    self.dailyWordDelegate?.acquireDailyWordCache(model: dw)
+                    self.dailyWordDelegate?.acquireDailyWord(model: dw)
                 }
             case let .failure(moyaError):
                 print(moyaError)

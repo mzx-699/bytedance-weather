@@ -8,8 +8,8 @@
 import UIKit
 /// 控制定时器的基类
 class BaseViewController: UIViewController {
-
-    var timer: Timer?
+    
+    var timer: DispatchSourceTimer?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,15 +24,17 @@ class BaseViewController: UIViewController {
         endTimer()
     }
     func startTimer() {
-        timer = .scheduledTimer(withTimeInterval: 60, repeats: true, block: { [weak self] _ in
-            guard let self = self else {return}
-            // 开启定时任务
+        
+        timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global(qos: .default))
+        timer?.schedule(deadline: .now() + 60, repeating: 60)
+        timer?.setEventHandler {
             self.request()
-        })
+        }
+        timer?.resume()
     }
     func endTimer() {
-        timer?.invalidate()
         if timer != nil {
+            timer?.cancel()
             timer = nil
         }
     }

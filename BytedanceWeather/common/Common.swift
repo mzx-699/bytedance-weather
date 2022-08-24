@@ -74,5 +74,11 @@ func getDayWeatherMap(day: DayWeather) -> Dictionary<String, String> {
 }
 
 class Weather {
-    static var city = ""
+    static var city: String = {
+        var city = UserDefaults.standard.string(forKey: "city")
+        if city == nil {
+            city = "北京"
+        }
+        return city!
+    }()
 }

@@ -8,10 +8,8 @@
 import Foundation
 
 
-protocol WeaetherDelegate: NSObjectProtocol {
+protocol WeaetherDelegate {
     
     func acquireWeekWeather(model: WeekWeather)
     func acquireDayWeather(model: DayWeather)
-    func acquireWeekWeatherCache(model: WeekWeather)
-    func acquireDayWeatherCache(model: DayWeather)
 }

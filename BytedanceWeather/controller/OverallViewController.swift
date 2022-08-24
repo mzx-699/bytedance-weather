@@ -11,19 +11,18 @@ import SwiftyJSON
 import SnapKit
 class OverallViewController: BaseViewController {
 
-    // 网络
-    let netManager = NetManager()
+    var netManager = NetManager()
     //MARK: - model
     var dayWeatherModel: DayWeather? = DayWeather.fromCache(key: Weather.city + "-" + DAYWEATHER_CACHE_KEY, cacheContainer: .hybrid)
     var weekWeatherModel: WeekWeather? = WeekWeather.fromCache(key: Weather.city + "-" + WEEKWEATHER_CACHE_KEY, cacheContainer: .hybrid)
     var weekdays: [String] = ["01号(今天)", "02号(明天)", "03号(后天)", "04号(周一)", "05号(周三)", "06号(周四)", "07号(周五)"]
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupUI()
         initNetDelegate()
         request()
+        self.navigationItem.title = Weather.city
         self.weekdays = getWeekDays(days: self.weekWeatherModel?.data ?? nil)
         NotificationCenter.default.addObserver(forName: .init(rawValue: NOTIFICATION_CENTER_UPDATE_CITY), object: nil, queue: nil) { [weak self] _ in
             guard let self = self else {return}
@@ -31,6 +30,10 @@ class OverallViewController: BaseViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.title = Weather.city
+        super.viewWillAppear(animated)
+    }
     //MARK: - 父类
     override func request() {
         self.netManager.dayWeatherRequest(city: Weather.city)
@@ -146,28 +149,23 @@ extension OverallViewController: WeaetherDelegate {
         self.weekWeatherModel = model
         updateWeekWeatherData()
     }
-    func acquireDayWeatherCache(model: DayWeather) {
-        self.dayWeatherModel = model
-        updateDayWeatherData()
-    }
-    func acquireWeekWeatherCache(model: WeekWeather) {
-        self.weekWeatherModel = model
-        updateWeekWeatherData()
-    }
     // 获得请求数据后，需要更新
     func updateDayWeatherData() {
         self.dayWeatherModel?.cache(key: Weather.city + "-" + DAYWEATHER_CACHE_KEY, cacheContainer: .hybrid)
-        self.navigationItem.title = self.dayWeatherModel!.city!
-        self.temLabel.text = self.dayWeatherModel!.tem! + "℃"
-        let temDay = self.dayWeatherModel!.temDay!
-        let temNight = self.dayWeatherModel!.temNight!
-        self.centerTemLabel.text = "最高温度: " + temDay + "℃ 最低温度: " + temNight + "℃"
-        self.weaLabel.text = self.dayWeatherModel!.wea!
+        DispatchQueue.main.async {
+            self.temLabel.text = self.dayWeatherModel!.tem! + "℃"
+            let temDay = self.dayWeatherModel!.temDay!
+            let temNight = self.dayWeatherModel!.temNight!
+            self.centerTemLabel.text = "最高温度: " + temDay + "℃ 最低温度: " + temNight + "℃"
+            self.weaLabel.text = self.dayWeatherModel!.wea!
+        }
     }
     func updateWeekWeatherData() {
         self.weekWeatherModel?.cache(key: Weather.city + "-" + WEEKWEATHER_CACHE_KEY, cacheContainer: .hybrid)
-        self.weekdays = getWeekDays(days: (self.weekWeatherModel?.data)!)
-        forecastTableView.reloadData()
+        DispatchQueue.main.async {
+            self.weekdays = getWeekDays(days: (self.weekWeatherModel?.data)!)
+            self.forecastTableView.reloadData()
+        }
         
     }
     
@@ -177,12 +175,10 @@ extension OverallViewController: WeaetherDelegate {
 private extension OverallViewController {
     @objc func rightSelectBtnClick() {
         let vc = SelectCityViewController()
-        vc.city = self.dayWeatherModel?.city ?? "北京"
         self.navigationController?.pushViewController(vc, animated: false)
     }
     
     @objc func rightUpdateBtnClick() {
-        delog("\(#function)")
         endTimer()
         WeatherLocation.shareInstance.getLocationInfo = { [weak self] _, _, _city, _ in
             guard let self = self else {return}
@@ -210,6 +206,7 @@ private extension OverallViewController {
                     UserDefaults.standard.set(citys, forKey: "citys")
                     // 更新全局city
                     Weather.city = subCity
+                    self.navigationItem.title = Weather.city
                     UserDefaults.standard.synchronize()
                     NotificationCenter.default.post(name: .init(rawValue: NOTIFICATION_CENTER_UPDATE_CITY), object: nil)
                     self.startTimer()
@@ -270,8 +267,7 @@ extension OverallViewController {
         }
     }
     func setupNav() {
-        
-        self.navigationItem.title = self.dayWeatherModel?.city ?? "北京"
+        self.navigationItem.title = Weather.city
         let height = navigationController?.navigationBar.frame.size.height ?? 44.0
         self.navRightSelectBtn.frame = CGRect(x: 0, y: 0, width: height, height: height)
         let vSelect = UIView(frame: self.navRightSelectBtn.frame)
