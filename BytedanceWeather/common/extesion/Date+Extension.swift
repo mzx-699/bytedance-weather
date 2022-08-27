@@ -10,7 +10,6 @@ import Foundation
 
 extension Date {
     static func getWeekDay(dateString: String, formatterString: String = "yyyy-MM-dd") -> Int {
-        
         let formatter = DateFormatter()
         formatter.dateFormat = formatterString
         let date = formatter.date(from: dateString)

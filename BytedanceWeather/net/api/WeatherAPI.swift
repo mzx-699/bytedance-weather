@@ -13,12 +13,10 @@ let WEATHER_APPID = "91746479"
 let WEATHER_APPSECRET = "tMVHOC5N"
 
 enum WeatherAPI: Equatable {
-    
     case weekWeatherCity(_ city: String)
     case dayWeatherCity(_ city: String)
     case weekWeather
     case dayWeather
-    
 }
 
 extension WeatherAPI: TargetType {

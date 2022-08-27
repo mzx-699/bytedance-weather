@@ -15,6 +15,7 @@ class BaseViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    // super
     override func viewWillAppear(_ animated: Bool) {
         endTimer()
         request()
